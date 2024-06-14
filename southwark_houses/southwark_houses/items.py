@@ -7,6 +7,8 @@ import scrapy
 
 
 class SouthwarkHousesItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    address = scrapy.Field()
+    price = scrapy.Field()
+    type = scrapy.Field()
+    tenure = scrapy.Field()
+    price_history = scrapy.Field()
