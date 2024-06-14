@@ -43,5 +43,5 @@ class PeckhamSpider(Spider):
             item.add_xpath("type", ".//div[@class='subTitle bedrooms']/span/text()")
             item.add_xpath("last_known_price", ".//table//tr[1]/td[@class='price']/text()")
             item.add_xpath("last_known_tenure", ".//table//tr[1]/td[contains(@class, 'tenure')]/text()")
-            item.add_xpath("price_history", ".//table//tr")
+            item.add_xpath("transaction_history", ".//table//tr")
             yield item.load_item()
