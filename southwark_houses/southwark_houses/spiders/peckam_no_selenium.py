@@ -13,6 +13,7 @@ class PeckhamNoSeleniumSpider(Spider):
 
     def parse(self, response):
         payload = json.loads(response.body)
+        total = payload["pagination"]["last"]
 
         for house in payload["results"]["properties"]:
             item = ItemLoader(item=SouthwarkHousesItem(),
@@ -25,3 +26,8 @@ class PeckhamNoSeleniumSpider(Spider):
             item.add_value("transaction_history", house["transactions"])
 
             yield item.load_item()
+
+        for page in range(2, total+1):
+            yield response.follow(self.url_template.format(page), callback=self.parse)
+
+
