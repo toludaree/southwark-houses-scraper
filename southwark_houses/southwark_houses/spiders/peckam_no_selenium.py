@@ -1,10 +1,27 @@
-import scrapy
+import json
+from scrapy import Spider
+from itemloaders import ItemLoader
+from southwark_houses.items import SouthwarkHousesItem
 
 
-class PeckamNoSeleniumSpider(scrapy.Spider):
-    name = "peckam_no_selenium"
+class PeckhamNoSeleniumSpider(Spider):
+    name = "peckham_no_selenium"
     allowed_domains = ["rightmove.co.uk"]
-    start_urls = ["https://rightmove.co.uk"]
+    url_template = "https://www.rightmove.co.uk/house-prices/result?soldIn=1&filterName=Sold%20in&locationType=REGION&locationId=85428&page={}"
+    current_page = 1
+    start_urls = [url_template.format(current_page)]
 
     def parse(self, response):
-        pass
+        payload = json.loads(response.body)
+
+        for house in payload["results"]["properties"]:
+            item = ItemLoader(item=SouthwarkHousesItem(),
+                              response=response,
+                              selector=house)
+            item.add_value("address", house["address"])
+            item.add_value("type", house["propertyType"])
+            item.add_value("last_known_price", house["transactions"][0]["displayPrice"])
+            item.add_value("last_known_tenure", house["transactions"][0]["tenure"])
+            item.add_value("transaction_history", house["transactions"])
+
+            yield item.load_item()
