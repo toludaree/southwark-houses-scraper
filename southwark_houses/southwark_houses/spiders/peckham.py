@@ -2,7 +2,7 @@ import time
 
 from scrapy import Selector, Spider
 from itemloaders import ItemLoader
-from southwark_houses.items import SouthwarkHousesItem
+from southwark_houses.items import SoouthwarkHousesSeleniumItem
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -40,9 +40,9 @@ class PeckhamSpider(Spider):
             selector = Selector(text=response)
             gallery = selector.xpath("//div[@class='propertyCard']")
             for listing in gallery:
-                item = ItemLoader(item=SouthwarkHousesItem(), response=response, selector=listing)
+                item = ItemLoader(item=SoouthwarkHousesSeleniumItem(), response=response, selector=listing)
                 item.add_xpath("address", ".//a[@data-gtm='title']/text()")
-                item.add_xpath("type", ".//div[@class='subTitle bedrooms']/span/text()")
+                item.add_xpath("type", ".//span[@class='propertyType']/text()")
                 item.add_xpath("last_known_price", ".//table//tr[1]/td[@class='price']/text()")
                 item.add_xpath("last_known_tenure", ".//table//tr[1]/td[contains(@class, 'tenure')]/text()")
                 item.add_xpath("transaction_history", ".//table//tr")
