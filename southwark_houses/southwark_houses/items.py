@@ -8,7 +8,12 @@ from itemloaders.processors import Join, MapCompose
 from lxml.etree import HTML
 
 
-def transaction_history_in(d):
+def sh_transaction_history_in(d):
+    return {"date_sold": d["dateSold"],
+            "price": d["displayPrice"],
+            "tenure": d["tenure"]}
+
+def shs_transaction_history_in(d):
     html = HTML(d)
     date_sold = html.xpath("//td[@class='date-sold']/text()")[0]
     price = html.xpath("//td[@class='price']/text()")[0]
@@ -23,11 +28,11 @@ class SouthwarkHousesItem(scrapy.Item):
     type = scrapy.Field(output_processor=Join())
     last_known_price = scrapy.Field(output_processor=Join())
     last_known_tenure = scrapy.Field(output_processor=Join())
-    transaction_history = scrapy.Field()
+    transaction_history = scrapy.Field(input_processor=MapCompose(sh_transaction_history_in))
 
 class SoouthwarkHousesSeleniumItem(scrapy.Item):
     address = scrapy.Field(output_processor=Join())
     type = scrapy.Field(output_processor=Join())
     last_known_price = scrapy.Field(output_processor=Join())
     last_known_tenure = scrapy.Field(output_processor=Join())
-    transaction_history = scrapy.Field(input_processor=MapCompose(transaction_history_in))
+    transaction_history = scrapy.Field(input_processor=MapCompose(shs_transaction_history_in))
