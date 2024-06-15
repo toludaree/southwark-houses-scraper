@@ -23,4 +23,11 @@ class SouthwarkHousesItem(scrapy.Item):
     type = scrapy.Field(output_processor=Join())
     last_known_price = scrapy.Field(output_processor=Join())
     last_known_tenure = scrapy.Field(output_processor=Join())
+    transaction_history = scrapy.Field()
+
+class SoouthwarkHousesSeleniumItem(scrapy.Item):
+    address = scrapy.Field(output_processor=Join())
+    type = scrapy.Field(output_processor=Join())
+    last_known_price = scrapy.Field(output_processor=Join())
+    last_known_tenure = scrapy.Field(output_processor=Join())
     transaction_history = scrapy.Field(input_processor=MapCompose(transaction_history_in))
