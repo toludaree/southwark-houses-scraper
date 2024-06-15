@@ -24,6 +24,7 @@ def shs_transaction_history_in(d):
             "tenure": tenure}
 
 class SouthwarkHousesItem(scrapy.Item):
+    area = scrapy.Field(output_processor=Join())
     address = scrapy.Field(output_processor=Join())
     type = scrapy.Field(output_processor=Join())
     last_known_price = scrapy.Field(output_processor=Join())
