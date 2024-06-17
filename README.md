@@ -2,9 +2,8 @@
 This project is part of Project Upwork. This is the job [link](https://www.upwork.com/jobs/~01c861c72b750458ce).
 
 ## Job Description
-Scrape data of all sold houses (terraced, detached and semi-detached properties) in Southwark over the last year from the rightmove website. The data should include details such as property address, sale price and any other relevant information.
+We are looking for a skilled web scraping expert to scrape data of all sold houses (terraced, detached, and semi-detached properties) in Southwark over the last year from the rightmove website. The data should include details such as property address, sale price and any other relevant information. The scraped data should be organized and delivered in a structured format (e.g., CSV or Excel). The ideal candidate should have experience in web scraping, proficiency in Python or any other preferred language for web scraping, and knowledge of using scraping tools such as BeautifulSoup or Scrapy. Attention to detail and the ability to meet deadlines are essential.
 
-## Website to Scrape
 https://www.rightmove.co.uk/house-prices-in-Southwark.html?showMapView=showMapView
 
 ## Result Schema
