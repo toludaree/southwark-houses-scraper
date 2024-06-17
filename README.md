@@ -51,7 +51,7 @@ I discovered 4 actions that I assumed could only be handled by JavaScript:
 - accepting or rejecting cookies.
 - changing the time frame to the past year for each area.
 - expanding the transaction history table for each house.
-- moving to the next page for each area
+- moving to the next page for each area.
 
 I decided to use Selenium to perform these actions before handling the html source to Scrapy.
 
@@ -77,9 +77,9 @@ I set out to crawl sold houses for all areas in Southwark. I was faced with 2 te
     I needed a way to extract the IDs from the main page for each area.
 
 The second decision was relatively easy for this spider. The IDs were contained in the class attributes of the `li` tags that contained the area links. For each area, I:
-- extracted the ID
-- formatted a url template I had earlier created with the ID
-- created a new request with the new url and a different callback function
+- extracted the ID.
+- formatted a url template I had earlier created with the ID.
+- created a new request with the new url and a different callback function.
 
 ### [HousesCrawlSpider](./southwark_houses/southwark_houses/spiders/houses_crawl.py)
 I had to do some more exploration for this one. The [LinkExtractor](https://docs.scrapy.org/en/latest/topics/link-extractors.html) returns a list of URLs to the CrawlSpider [Rule](https://docs.scrapy.org/en/latest/topics/spiders.html#crawling-rules). Therefore, I could not get the `li` tags through the extractor.
@@ -90,7 +90,7 @@ Through the docs, I discovered the `process_request` attribute of the Rule class
 ### Requirements
 - Python (>= 3.10)
 - [Google Chrome](https://www.google.com/chrome/)
-- [chromedriver](https://developer.chrome.com/docs/chromedriver/downloads) corresponding to your browser verison
+- [chromedriver](https://developer.chrome.com/docs/chromedriver/downloads) corresponding to your browser version. The driver executable file must be in `PATH`.
 ### Setup
 - Clone the repository
     ```bash
@@ -108,7 +108,6 @@ Through the docs, I discovered the `process_request` attribute of the Rule class
     ```bash
     pip install -r requirements.txt
     ```
-- To use Selenium, you need a browser installed and a driver for the browser. This project uses Chrome so download the [chromedriver](https://developer.chrome.com/docs/chromedriver/downloads) corresponding to your browser version and place it in `PATH`.
 ### Scrape away
 - Navigate to the [southwark_houses](./southwark_houses/) directory.
     ```bash
